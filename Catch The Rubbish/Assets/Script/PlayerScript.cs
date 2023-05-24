@@ -7,7 +7,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     int speed;
     public int score = 0;
-    public GameManager game_Manager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,11 +14,6 @@ public class PlayerScript : MonoBehaviour
         {
             score += 1;
             Destroy(collision.gameObject);
-        }
-
-        if(score == game_Manager.targetScore)
-        {
-            game_Manager.StopSpawning();
         }
     }
     // Start is called before the first frame update

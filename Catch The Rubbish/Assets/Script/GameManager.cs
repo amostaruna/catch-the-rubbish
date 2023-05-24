@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject Rubbish_Prefab;
-    public int targetScore = 10;
+    public PlayerScript playerScript;
+    public Text score;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        score.text = playerScript.score.ToString();
     }
 
     void SpawnRubbish()

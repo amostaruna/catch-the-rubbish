@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class GroundScript : MonoBehaviour
 {
-    public PlayerScript player_Script;
+    private int endGame = 3;
 
+    public GameManager gameManager;
+    public GameObject health1, health2, health3;
+    public GameObject gameOverText;
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Rubbish")
+        if (collision.tag == "Rubbish")
         {
+            endGame -= 1;
             Destroy(collision.gameObject);
         }
     }
@@ -23,6 +28,41 @@ public class GroundScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        switch (endGame)
+        {
+            case 0: 
+                health1.SetActive(false);
+                health2.SetActive(false);
+                health3.SetActive(false);
+                gameOverText.SetActive(true);
+                break;
+            case 1:
+                health1.SetActive(true);
+                health2.SetActive(false);
+                health3.SetActive(false);
+                break;
+            case 2:
+                health1.SetActive(true);
+                health2.SetActive(true);
+                health3.SetActive(false);
+                break;
+            case 3:
+                health1.SetActive(true);
+                health2.SetActive(true);
+                health3.SetActive(true);
+                gameOverText.SetActive(false);
+                break;
+            default:
+                health1.SetActive(false);
+                health2.SetActive(false);
+                health3.SetActive(false);
+                gameOverText.SetActive(true);
+                break;
+        }
+
+        if (endGame <= 0)
+        {
+            gameManager.StopSpawning();
+        }
     }
 }
